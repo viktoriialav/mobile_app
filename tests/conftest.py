@@ -4,7 +4,7 @@ from appium import webdriver
 from selene import browser, support
 
 import config
-from mobile_app_tests.utils import allure_browserstack
+from my_expenses_tests.utils import allure_browserstack
 
 
 @pytest.fixture(scope='function', autouse=True)

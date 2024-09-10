@@ -6,7 +6,7 @@ from appium.options.android import UiAutomator2Options
 from appium.options.ios import XCUITestOptions
 from pydantic_settings import BaseSettings
 
-from mobile_app_tests.utils import path
+from my_expenses_tests.utils import path
 
 EnvContext = Literal['local_emulator', 'local_real', 'bstack_android']
 
