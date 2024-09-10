@@ -1,3 +1,5 @@
+from datetime import date
+
 from allure import step
 from appium.webdriver.common.appiumby import AppiumBy
 from selene import browser, have, command
@@ -6,11 +8,12 @@ from selene import browser, have, command
 class StartPages:
     def __init__(self):
         self.font_size = browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/font_size'))
+        self.all_options = browser.all((AppiumBy.ID, 'android:id/text1'))
 
     def set_theme(self, value):
         with step('Set a theme'):
             browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/themeSpinner')).click()
-            browser.all((AppiumBy.ID, 'android:id/text1')).element_by(have.exact_text(value)).click()
+            self.all_options.element_by(have.exact_text(value)).click()
 
     def check_page_theme(self, value):
         with step('Check the page theme'):
@@ -21,35 +24,35 @@ class StartPages:
             self.font_size.perform(command.drag_and_drop_by_offset(x, y))
 
     def check_font_size(self, value):
-        with step('Check a page font size'):
+        with step('Check the page font size'):
             self.font_size.should(have.exact_text(str(float(value))))
             browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/font_size_display_name')).should(
                 have.exact_text(f'System default + {value * 10}%'))
 
     def make_display_form_compact(self, value: bool):
-        if value:
-            with step('Make the display form compact'):
-                browser.element((AppiumBy.ANDROID_UIAUTOMATOR,
-                                 'new UiSelector().className("android.widget.CheckBox").instance(0)')).click()
+        with step('Make the display form compact'):
+            if value:
+                with step('Make the display form compact'):
+                    browser.element((AppiumBy.ANDROID_UIAUTOMATOR,
+                                     'new UiSelector().className("android.widget.CheckBox").instance(0)')).click()
 
-    # def check_display_form(self):
-    #     with step('Check display form'):
-    #         browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/design_preview')).element((
-    #             AppiumBy.ANDROID_UIAUTOMATOR,
-    #             'new UiSelector().className("android.view.View").instance(0)')).element((
-    #             AppiumBy.ANDROID_UIAUTOMATOR,
-    #             'new UiSelector().className("android.view.View").instance(0)')).should(
-    #             have.exact_text('9/9/24'))
+    def check_display_form(self):
+        with step('Check the display form'):
+            temp = date.today()
+            temp = f'{temp.month}/{temp.day}/{temp.year % 100}'
+            browser.element((AppiumBy.ANDROID_UIAUTOMATOR, f'new UiSelector().text("{temp}")')).should(
+                have.exact_text(temp))
 
     def should_have_special_settings_on_first_page(self, theme, font_size, compact):
-        self.check_page_theme(theme)
-        self.check_font_size(font_size)
-        # if compact:
-        #     self.check_display_form()
+        with step('Check the first page settings'):
+            self.check_page_theme(theme)
+            self.check_font_size(font_size)
+            if compact:
+                self.check_display_form()
 
     def open_next_page(self):
         with step('Open next page'):
-            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/suw_navbar_next')).click()
+            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/suw_navbar_next')).with_(timeout=15).click()
 
     def click_get_started(self):
         with step('Click \'Get started\''):
@@ -59,3 +62,35 @@ class StartPages:
         with step(f'Check the text {'on the ' * bool(page) + str(page) + ' page' * bool(page)}'):
             browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/suw_layout_title')).should(
                 have.exact_text(text))
+
+    def turn_on_backup_database_at_the_specified_time(self, value):
+        browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/auto_backup')).click()
+        if not value:
+            browser.element((AppiumBy.ID, 'com.android.permissioncontroller:id/permission_allow_button')).click()
+
+    def create_label_for_budget_book(self, value):
+        with step('Create a label for a new budget book'):
+            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/Label')).click()
+            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/Label')).type(value)
+            browser.driver.hide_keyboard()
+
+    def set_opening_balance(self, value):
+        with step('Set an opening balance value'):
+            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/AmountEditText')).click()
+            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/AmountEditText')).type(str(value))
+            browser.driver.hide_keyboard()
+
+    def open_more_options_on_third_page(self):
+        with step('Open more options on the third page'):
+            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/MoreOptionsButton')).click()
+
+    def create_description(self, value):
+        with step('Create a description for a new budget boook'):
+            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/Description')).click()
+            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/Description')).type(value)
+            browser.driver.hide_keyboard()
+
+    def set_budget_book_type(self, value):
+        with step('Set a budget book type'):
+            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/AccountType')).click()
+            self.all_options.element_by(have.exact_text(value)).click()

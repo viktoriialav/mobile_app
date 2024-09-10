@@ -8,7 +8,7 @@ from pydantic_settings import BaseSettings
 
 from mobile_app_tests.utils import path
 
-EnvContext = Literal['local_emulator', 'local_real', 'bstack_android', 'bstack_ios']
+EnvContext = Literal['local_emulator', 'local_real', 'bstack_android']
 
 
 class Settings(BaseSettings):

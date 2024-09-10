@@ -33,4 +33,5 @@ venv*/
 # Allure
 tests/allure-results
 allure-results
+allure-results-*
 allure-report-*
