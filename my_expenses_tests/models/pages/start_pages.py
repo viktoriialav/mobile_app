@@ -84,7 +84,7 @@ class StartPages:
         with step('Open more options on the third page'):
             browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/MoreOptionsButton')).click()
 
-    def create_description(self, value):
+    def enter_description(self, value):
         with step('Create a description for a new budget boook'):
             browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/Description')).click()
             browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/Description')).type(value)
@@ -94,3 +94,9 @@ class StartPages:
         with step('Set a budget book type'):
             browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/AccountType')).click()
             self.all_options.element_by(have.exact_text(value)).click()
+
+    def skip_all_start_pages(self):
+        with step('Skip all start pages to open the main page'):
+            self.open_next_page()
+            self.open_next_page()
+            self.click_get_started()
