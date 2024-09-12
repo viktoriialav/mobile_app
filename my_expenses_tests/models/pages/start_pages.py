@@ -43,7 +43,7 @@ class StartPages:
             browser.element((AppiumBy.ANDROID_UIAUTOMATOR, f'new UiSelector().text("{temp}")')).should(
                 have.exact_text(temp))
 
-    def should_have_special_settings_on_first_page(self, theme, font_size, compact):
+    def should_have_specific_settings_on_first_page(self, theme, font_size, compact):
         with step('Check the first page settings'):
             self.check_page_theme(theme)
             self.check_font_size(font_size)

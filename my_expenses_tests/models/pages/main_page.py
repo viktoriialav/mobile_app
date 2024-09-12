@@ -1,9 +1,12 @@
-from datetime import date, datetime
+from datetime import datetime
 from typing import Union
 
 from allure import step
 from appium.webdriver.common.appiumby import AppiumBy
 from selene import browser, be, have, query
+
+from my_expenses_tests.utils.date_time import datetime_long_format, date_middle_format
+from my_expenses_tests.utils.money import int_to_str, str_to_int
 
 
 class MainPage:
@@ -11,76 +14,102 @@ class MainPage:
         self.toolbar = browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/toolbar'))
         self.accountList = browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/accountList'))
         self.expenses = browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/viewPager'))
+        self.template_menu_button = browser.element((AppiumBy.ID,
+                                                     'org.totschnig.myexpenses:id/MANAGE_TEMPLATES_COMMAND'))
+
+        self.last_expense = self.expenses.element((AppiumBy.ANDROID_UIAUTOMATOR,
+                                                   'new UiSelector().className("android.view.View").instance(3)'))
+        self.total_sum = self.toolbar.all((AppiumBy.CLASS_NAME, 'android.widget.TextView')).second
+        self.manage_accounts_button = self.toolbar.element((AppiumBy.CLASS_NAME, 'android.widget.ImageButton'))
+
+    def close_notification(self):
+        with step('Close the notification about button'):
+            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/viewPager')).click()
+
+    def should_have_specific_text(self):
+        with step('Check the specific text on the main page'):
+            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/viewPager')).element(
+                (AppiumBy.CLASS_NAME, 'android.widget.TextView')).should(have.exact_text('No Expenses Yet!'))
 
     def should_have_icons_and_specific_text(self, name):
         with step('Check the main page'):
-            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/MANAGE_TEMPLATES_COMMAND')).should(be.visible)
+            self.template_menu_button.should(be.visible)
             browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/BUDGET_COMMAND')).should(be.visible)
             browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/fab')).should(be.visible)
-            browser.element(
-                (AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().description("Open navigation drawer")')).should(
-                be.visible)
+            self.manage_accounts_button.should(be.visible)
+            browser.element((AppiumBy.ACCESSIBILITY_ID, 'More options')).should(be.visible)
             self.toolbar.all((AppiumBy.CLASS_NAME, 'android.widget.TextView')).first.should(have.exact_text(name))
 
-    def should_have_specific_text_after_all_setting_on_start_pages(self, name, money, currency, description,
-                                                                   account_type):
+    def should_have_specific_text_after_all_setting_on_start_pages(self, name, money, description, account_type):
         with step('Check all specific options in the main menu after the third start page settings'):
             self.toolbar.all((AppiumBy.CLASS_NAME, 'android.widget.TextView')).first.should(have.exact_text(name))
-            self.toolbar.all((AppiumBy.CLASS_NAME, 'android.widget.TextView')).second.should(have.text(money))
-            self.toolbar.all((AppiumBy.CLASS_NAME, 'android.widget.TextView')).second.should(have.text(currency))
+            self.total_sum.should(have.text(int_to_str(money)))
 
-            self.toolbar.element((AppiumBy.CLASS_NAME, 'android.widget.ImageButton')).click()
+            self.manage_accounts_button.click()
 
             self.accountList.element((AppiumBy.ANDROID_UIAUTOMATOR, f'new UiSelector().text({name}).instance(1)'))
             self.accountList.element((AppiumBy.ANDROID_UIAUTOMATOR, f'new UiSelector().text({account_type})'))
             self.accountList.element((AppiumBy.ANDROID_UIAUTOMATOR, f'new UiSelector().text({description})'))
 
-    def should_have_specific_text_in_the_expense_form_on_main_page(self, money: int, payee: str, notes: str,
-                                                                    expense_datetime: Union[None | datetime]):
-        money = f'{float(money):,.02f}'
-        expense_date = expense_datetime.date().strftime('%b %d, %Y').split()
-        expense_date[1] = expense_datetime[1][1:] if expense_date[1][0] == '0' else expense_date[1]
-        expense_date = ' '.join(expense_date)
-
-
-        self.expenses.element((AppiumBy.ANDROID_UIAUTOMATOR, f'new UiSelector().text("{notes} / {payee}")')).should(have.exact_text(f'{notes} / {payee}'))
-        # self.expenses.element((AppiumBy.ANDROID_UIAUTOMATOR, f'new UiSelector().text("${money}").instance(1)')).should(have.text(f'${money}'))
-        self.expenses.element((AppiumBy.ANDROID_UIAUTOMATOR, f'new UiSelector().text("${money}").instance(1)')).get(query.attribute('text'))
-        self.expenses.element((AppiumBy.ANDROID_UIAUTOMATOR, f'new UiSelector().text("{expense_date}")')).should(have.exact_text(expense_date))
-
-        self.expenses.element((AppiumBy.ANDROID_UIAUTOMATOR, f'new UiSelector().text("${money}")')).should(have.exact_text(f'${money}'))
-
-    def should_have_specific_text_in_details_menu(self, money: int, payee: str, notes: str,
-                                                      expense_datetime: Union[None | datetime]):
-        with step('Check the specific text in the detail menu for the expense'):
-            money = f'{float(money):,.02f}'
-            expense_datetime = expense_datetime.strftime('%A, %B %d, %Y %I:%M %p').split()
-            expense_datetime[2] = expense_datetime[2][1:] if expense_datetime[2][0] == '0' else expense_datetime[2]
-            expense_datetime[4] = expense_datetime[4][1:] if expense_datetime[4][0] == '0' else expense_datetime[2]
-            expense_datetime = ' '.join(expense_datetime)
-
+    def should_have_specific_text_in_details_menu(self, money: int, expense_datetime: datetime,
+                                                  payee: Union[None | str] = None,
+                                                  notes: Union[None | str] = None,
+                                                  tags: Union[None | list[str]] = None):
+        with (step('Check the specific text in the detail menu for the expense')):
+            expense_datetime = datetime_long_format(expense_datetime)
             browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/Date')).should(have.exact_text(expense_datetime))
-            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/Amount')).should(have.exact_text(f'${money}'))
-            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/Comment')).should(have.exact_text(notes))
-            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/Payee')).should(have.exact_text(payee))
+
+            money = int_to_str(money)
+            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/Amount')).should(have.exact_text(f'{money}'))
+
+            if notes:
+                browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/Comment')).should(have.exact_text(notes))
+            if payee:
+                browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/Payee')).should(have.exact_text(payee))
+            if tags:
+                for i, tag in enumerate(tags):
+                    browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/TagGroup')).all(
+                        (AppiumBy.CLASS_NAME, 'android.widget.Button'))[i].should(have.exact_text(tag))
+
 
     def open_details_menu_for_last_expense(self):
         with step('Open details menu for the last expense'):
-            self.expenses.element((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.view.View").instance(3)')).click()
+            self.last_expense.click()
             browser.element((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Details")')).click()
 
-    def take_current_amount_of_money(self):
-        money = self.toolbar.all((AppiumBy.CLASS_NAME, 'android.widget.TextView')).second.get(query.attribute('text'))
-        return money
+    def get_current_total_sum(self):
+        with step('Get current total sum'):
+            return str_to_int(self.total_sum.get(query.attribute('text')))
 
-    def should_have_the_same_total_amount_of_money(self, value):
-        with step('Check total amount of money'):
-            self.toolbar.all((AppiumBy.CLASS_NAME, 'android.widget.TextView')).second.should(have.text(value))
+    def should_have_specific_total_sum(self, value):
+        with step('Check total sum'):
+            self.total_sum.should(have.text(int_to_str(value)))
 
     def delete_last_expence(self):
         with step('Delete the last expense'):
-            self.expenses.element((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().className("android.view.View").instance(3)')).click()
+            self.last_expense.click()
             browser.element((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Delete")')).click()
             browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/buttonPanel')).element((AppiumBy.ID, 'android:id/button1')).click()
+
+    def should_be_on_the_main_page(self):
+        with step('Check the expense on the main page'):
+            self.last_expense.should(be.visible)
+
+    def should_have_specific_number_of_expenses(self, number: int, expense_datetime: datetime):
+        with step('Check the number of expenses'):
+            expense_date = date_middle_format(expense_datetime)
+            browser.all((AppiumBy.XPATH, f'(//android.widget.TextView[@text="{expense_date}"])')).should(have.size(number))
+
+    def should_have_specific_number_of_expenses_with_equal_notes_and_payer(self, number, payee, notes):
+        with step('Check the number of expenses with equal notes and payee/payer'):
+            browser.all((AppiumBy.XPATH, f'(//android.widget.TextView[@text="{notes} / {payee}"])')).should(have.size(number))
+
+
+
+
+
+
+
+
 
 

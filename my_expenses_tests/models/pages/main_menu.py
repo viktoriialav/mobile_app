@@ -19,9 +19,6 @@ class MainMenu:
 
     def should_have_specific_options_in_main_menu_after_second_start_page_settings(self):
         with step('Check all specific options in the main menu after the second start page settings'):
-            self.open()
-            self.open_settings()
-            self.open_backup_and_restore_menu_from_settings()
             browser.all((AppiumBy.ID, 'android:id/title')).element_by(have.exact_text('Auto-backup time')).should(
                 be.enabled)
             browser.element((AppiumBy.ANDROID_UIAUTOMATOR,
