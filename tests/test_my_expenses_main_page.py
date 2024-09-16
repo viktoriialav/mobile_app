@@ -57,7 +57,7 @@ class TestAdditionExpenses:
         app.new_expense.close_notification()
 
         app.new_expense.set_is_that_expense_or_income('Income')
-        app.new_expense.enter_amount_of_money(100)
+        app.new_expense.enter_amount_of_money(300)
         expense_datetime = app.new_expense.get_info_about_date_and_time()
         app.new_expense.click_button_save_data_and_close_form()
 
@@ -67,18 +67,17 @@ class TestAdditionExpenses:
         app.new_expense.click_button_save_data_and_close_form()
 
         app.new_expense.open_new_expense()
-        app.new_expense.set_is_that_expense_or_income('Income')
+        app.new_expense.set_is_that_expense_or_income('Expense')
         app.new_expense.enter_amount_of_money(150)
         app.new_expense.click_button_save_data_and_close_form()
 
-        app.main_page.should_have_specific_total_sum(450)
+        app.main_page.should_have_specific_total_sum(350)
         app.main_page.should_have_specific_number_of_expenses(number=3, expense_datetime=expense_datetime)
 
     @allure.severity(severity_level=Severity.CRITICAL)
     def test_delete_last_expense(self):
         app.start_pages.skip_all_start_pages()
         app.main_page.close_notification()
-        start_total_money = app.main_page.get_current_total_sum()
         app.new_expense.open_new_expense()
         app.new_expense.close_notification()
 
@@ -87,7 +86,7 @@ class TestAdditionExpenses:
         app.new_expense.click_button_save_data_and_close_form()
         app.main_page.delete_last_expence()
 
-        app.main_page.should_have_specific_total_sum(start_total_money)
+        app.main_page.should_have_specific_total_sum(0)
 
     @allure.severity(severity_level=Severity.NORMAL)
     def test_button_save_and_create(self):

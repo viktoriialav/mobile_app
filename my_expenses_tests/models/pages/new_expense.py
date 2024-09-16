@@ -1,8 +1,6 @@
-from datetime import datetime
-
 from allure import step
 from appium.webdriver.common.appiumby import AppiumBy
-from selene import browser, query, have
+from selene import browser, query
 
 from my_expenses_tests.utils.date_time import date_and_time_in_datetime_form
 
@@ -56,7 +54,8 @@ class NewExpense:
         with step('Get information about date and time of the expense'):
             date = browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/DateButton')).get(query.attribute('text'))
             time = browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/TimeButton')).get(query.attribute('text'))
-            return date_and_time_in_datetime_form(date, time)
+            datetime_form = date_and_time_in_datetime_form(date, time)
+            return datetime_form
 
     def add_tag(self, value):
         with step('Add a tag'):
