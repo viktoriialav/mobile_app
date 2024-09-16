@@ -4,14 +4,9 @@ import config
 
 
 def date_middle_format(value: datetime):
-    if config.settings.is_bstack:
-        expense_date = value.date().strftime('%d %b, %Y').split()
-        expense_date[1] = expense_date[1][1:] if expense_date[1][0] == '0' else expense_date[1]
-        expense_date = ' '.join(expense_date)
-    else:
-        expense_date = value.date().strftime('%b %d, %Y').split()
-        expense_date[1] = expense_date[1][1:] if expense_date[1][0] == '0' else expense_date[1]
-        expense_date = ' '.join(expense_date)
+    expense_date = value.date().strftime('%b %d, %Y').split()
+    expense_date[1] = expense_date[1][1:] if expense_date[1][0] == '0' else expense_date[1]
+    expense_date = ' '.join(expense_date)
     return expense_date
 
 

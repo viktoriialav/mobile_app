@@ -32,6 +32,6 @@ venv*/
 
 # Allure
 tests/allure-results
-allure-results
+allure-results-bstack
 allure-results-*
 allure-report-*
