@@ -28,10 +28,11 @@ class NewExpense:
 
     def set_is_that_expense_or_income(self, value):
         with step(f'Set that it is {value}'):
-            temp = browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/TaType')).get(query.attribute('content-desc'))
+            temp = browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/TaType')).get(
+                query.attribute('content-desc'))
             temp = temp.split()[-1]
             if value != temp:
-                    browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/TaType')).click()
+                browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/TaType')).click()
 
     def enter_amount_of_money(self, value):
         with step('Enter amount of money'):

@@ -3,7 +3,6 @@ from typing import Optional, Literal
 
 import dotenv
 from appium.options.android import UiAutomator2Options
-from appium.options.ios import XCUITestOptions
 from pydantic_settings import BaseSettings
 
 from my_expenses_tests.utils import path
@@ -41,10 +40,7 @@ class Settings(BaseSettings):
 
     @property
     def driver_options(self):
-        if self.platformName == 'android':
-            options = UiAutomator2Options()
-        else:
-            options = XCUITestOptions()
+        options = UiAutomator2Options()
 
         options.device_name = self.deviceName
         options.udid = self.udid
