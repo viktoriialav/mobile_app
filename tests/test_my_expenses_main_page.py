@@ -8,6 +8,7 @@ from my_expenses_tests.models.applications import app
 @allure.label('owner', 'Viktoriia Lavrova')
 class TestAdditionExpenses:
     @allure.severity(severity_level=Severity.CRITICAL)
+    @allure.tag('Main page')
     def test_general_options_on_main_page(self):
         app.start_pages.skip_all_start_pages()
         app.main_page.close_notification()
@@ -15,6 +16,7 @@ class TestAdditionExpenses:
         app.main_page.should_have_icons_and_specific_text(name='Budget Book')
 
     @allure.severity(severity_level=Severity.CRITICAL)
+    @allure.tag('Add', 'Expense')
     def test_add_one_new_expense_and_check_it_on_main_page(self):
         app.start_pages.skip_all_start_pages()
         app.main_page.close_notification()
@@ -29,6 +31,7 @@ class TestAdditionExpenses:
         app.main_page.should_have_specific_total_sum(1000)
 
     @allure.severity(severity_level=Severity.NORMAL)
+    @allure.tag('Add', 'Expense', 'Details menu')
     def test_fill_whole_form_of_new_expense_and_check_info_in_details_menu(self):
         app.start_pages.skip_all_start_pages()
         app.main_page.close_notification()
@@ -50,6 +53,7 @@ class TestAdditionExpenses:
                                                                 expense_datetime=expense_datetime)
 
     @allure.severity(severity_level=Severity.CRITICAL)
+    @allure.tag('Add', 'Expense')
     def test_add_some_new_expenses(self):
         app.start_pages.skip_all_start_pages()
         app.main_page.close_notification()
@@ -75,6 +79,7 @@ class TestAdditionExpenses:
         app.main_page.should_have_specific_number_of_expenses(number=3, expense_datetime=expense_datetime)
 
     @allure.severity(severity_level=Severity.CRITICAL)
+    @allure.tag('Delete', 'Expense')
     def test_delete_last_expense(self):
         app.start_pages.skip_all_start_pages()
         app.main_page.close_notification()
@@ -89,6 +94,7 @@ class TestAdditionExpenses:
         app.main_page.should_have_specific_total_sum(0)
 
     @allure.severity(severity_level=Severity.NORMAL)
+    @allure.tag('Add', 'Expense', 'Save and Create')
     def test_button_save_and_create(self):
         app.start_pages.skip_all_start_pages()
         app.main_page.close_notification()

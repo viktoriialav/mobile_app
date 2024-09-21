@@ -9,6 +9,7 @@ from my_expenses_tests.models.applications import app
 @allure.label('owner', 'Viktoriia Lavrova')
 class TestStartPages:
     @allure.severity(severity_level=Severity.BLOCKER)
+    @allure.tag('Start page')
     def test_start_settings_pages(self):
         app.start_pages.should_have_special_text(text='My Expenses adapts to your preference', page=1)
 
@@ -22,6 +23,7 @@ class TestStartPages:
         app.main_page.should_have_specific_text()
 
     @allure.severity(severity_level=Severity.NORMAL)
+    @allure.tag('Settings', 'Start page')
     def test_settings_on_first_start_page(self):
         app.start_pages.set_theme('Dark')
         app.start_pages.change_font_size(x=1, y=0)
@@ -30,6 +32,7 @@ class TestStartPages:
         app.start_pages.should_have_specific_settings_on_first_page(theme='Dark', font_size=2, compact=True)
 
     @allure.severity(severity_level=Severity.NORMAL)
+    @allure.tag('Settings', 'Start page')
     def test_settings_on_second_start_page(self):
         app.start_pages.open_next_page()
 
@@ -44,6 +47,7 @@ class TestStartPages:
         app.main_menu.should_have_specific_options_in_main_menu_after_second_start_page_settings()
 
     @allure.severity(severity_level=Severity.NORMAL)
+    @allure.tag('Settings', 'Start page', 'Balance')
     def test_settings_on_third_start_page(self):
         app.start_pages.open_next_page()
         app.start_pages.open_next_page()
