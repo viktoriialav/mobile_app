@@ -46,13 +46,17 @@ class Settings(BaseSettings):
         options.udid = self.udid
         options.platform_name = self.platformName
         options.platform_version = self.platformVersion
-        options.app = self.app if (self.app.startswith('/') or self.app.startswith('bs://') or self.app.startswith(
-            'C:\\')) else path.abs_path_from_root(self.app)
+
+        if self.app:
+            options.app = path.define_app_path(self.app)
+
         options.app_wait_activity = self.appWaitActivity
 
         self.is_bstack = 'hub.browserstack.com' in self.remote_url
         if self.is_bstack:
             dotenv.load_dotenv(path.abs_path_from_root('.env.bstack_credential'))
+            options.app = os.getenv('app')
+
             self.user_name = os.getenv('bstack_userName')
             self.access_key = os.getenv('bstack_accessKey')
             options.load_capabilities(
