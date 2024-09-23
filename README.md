@@ -15,9 +15,11 @@ ___
 
 [Cайт](https://www.myexpenses.mobi/ru/) с информацией о приложении и ссылками для скачивания с различных ресурсов.
 
-<img align="center" src="/resources/pictures/Main_page.png" width="1000" alt="Main_page"/>
+<p align="center">
+<img align="center" src="/resources/pictures/Main_page.png" width="700" alt="Main_page"/>
+</p>
 
-[Ссылка](https://github.com/mtotschnig/MyExpenses) на Github c кодом приложения.
+[Github MyExpenses](https://github.com/mtotschnig/MyExpenses) c кодом приложения.
 ___
 <a id="item-2"></a>
 ### Цель проекта:
@@ -100,7 +102,7 @@ ___
 - Тестирование основных функций главной страницы:
   * Наличие основных опций на главной странице
   * Добавление расхода/дохода
-  * Добавление расхода/дохода со всеми заполненными полями и проверка их содержания в детализации расхода/дохода
+  * Добавление расхода/дохода со всеми заполненными полями и их проверка в детализации расхода/дохода
   * Добавление нескольких расходов/доходов
   * Удаление последнего расхода/дохода
   * Проверка работы функции "Save and create"
@@ -112,14 +114,12 @@ ___
 
 ### Сборка проекта и запуск тестов
 
-Запустить проект можно как локально, так и удаленно. Далее будут приведены списки действия для обоих случаем.
+Запустить проект можно как локально, так и удаленно. Далее приведены списки действий для обоих случаев.
 
-Для запуска проекта удаленно с использованием Jenkins и BrowserStack необходимо:
+Для запуска проекта удаленно с использованием **Jenkins** и **BrowserStack** необходимо:
 - Создать новый проект в **Jenkins**
 - Указать в настройках проекта **Source Code Management** в **Git** директорию текущего проекта и ветку `main`
 - В **Build Steps**:
-  * Создать файл `.env.bstack_credential` по примеру `.env.bstack_credential.example`, получив необходимые параметры из 
-  аккаунта в BrowserStack (подробнее по [ссылке]) и 
   * Создать файл `.env.bstack_credential` по примеру `.env.bstack_credential.example`, указав для него опции 
   **Create at Workspace**  и **Overwrite file** и получив значения **bstack_userName** и **bstack_accessKey** из 
   аккаунта в **BrowserStack** (подробнее по [ссылке](https://www.browserstack.com/docs/iaam/security/manage-access-keys))
@@ -145,7 +145,7 @@ ___
 <img src="resources/pictures/Jenkins_Build_Now.png" width="700" alt="Press Build Now">
 </p>
 
-Для запуска проекта локально на ПК с помощью **BrowserStack** или **Android Studio** необходимо:
+Для запуска проекта локально с использованием **BrowserStack** или **Android Studio** необходимо:
 - Скачать проект и открыть его привычным способом
 - Установить `poetry`, если не установлен*: `pip install poetry`
 - Создать виртуальное окружение и установить зависимости
@@ -193,7 +193,7 @@ allure serve allure-results
 </p>
 
 Посмотреть подробнее тест-кейсы можно во вкладке **Behaviors** (или **Suites**, или **Packages**). Для каждого теста 
-представлены скриншот последней страницы, xml-файл с копией дерева последней страницы теста и видео прохождения 
+представлены скриншот экрана в конце теста, xml-файл с копией дерева последней страницы теста и видео прохождения 
 самого теста (см. правый нижний угол изображения ниже).
 
 <p align="center">
@@ -234,7 +234,8 @@ allure serve allure-results
 <img src="resources/pictures/Allure_TestOps_Test_Cases.png" width="700" alt="Allure TestOps Tests Cases">
 </p>
 
-При необходимости можно отфильтровать тесты по какому-либо критерию.
+При необходимости можно отфильтровать тесты по какому-либо критерию. Ниже приведен пример для фильтрации по тегам 
+`Add` и `Expense`.
 
 <p align="center">
 <img src="resources/pictures/Allure_TestOps_Test_Cases_Filtered.png" width="700" alt="Allure TestOps Tests Cases Filtered">
@@ -249,7 +250,7 @@ ___
 Проект в **Jenkins** настроен таким образом, чтобы уведомления приходили в конкретный чат приложения **Telegram**.
 
 <p align="center">
-<img src="resources/pictures/Telegram_message.png" width="350" alt="Message from Telegram">
+<img src="resources/pictures/Telegram_message.png" width="300" alt="Message from Telegram">
 </p>
 
 ___
@@ -263,13 +264,13 @@ ___
 - удаленно на BrowserStack для первой группы тестов
 
 <p align="center">
-<img src="resources/video/Mobile_1.gif" width="500" alt="Video from Browserstack">
+<img src="resources/video/Mobile_1.gif" width="400" alt="Video from Browserstack">
 </p>
 
 - удаленно на BrowserStack для второй группы тестов
 
 <p align="center">
-<img src="resources/video/Mobile_2.gif" width="500" alt="Video from Browserstack">
+<img src="resources/video/Mobile_2.gif" width="400" alt="Video from Browserstack">
 </p>
 
 
