@@ -1,33 +1,28 @@
 ## Проект по автоматизации тестирования приложения My Expenses для Android
 ___
-Содержание:
+### Содержание:
 - [Исходные данные](#item-1)
 - [Цель проекта](#item-2)
 - [Используемые технологии](#item-3)
-
-[//]: # (- [Тесты]&#40;#item-4&#41;)
-
-[//]: # (- [Сборка проекта и запуск тестов]&#40;#item-5&#41;)
-
-[//]: # (- [Отчет о прохождении тестов]&#40;#item-6&#41;)
-
-[//]: # (- [Уведомление о прохождении тестов]&#40;#item-7&#41;)
-
-[//]: # (- [Видео о прохождении тестов]&#40;#item-8&#41;)
+- [Тесты](#item-4)
+- [Сборка проекта и запуск тестов](#item-5)
+- [Отчет о прохождении тестов](#item-6)
+- [Уведомление о прохождении тестов](#item-7)
+- [Видео о прохождении тестов](#item-8)
 ___
 <a id="item-1"></a>
 ### Исходные данные
 
 [Cайт](https://www.myexpenses.mobi/ru/) с информацией о приложении и ссылками для скачивания с различных ресурсов.
 
-<img align="center" src="/resources/Main_page.png" width="1000" alt="Main_page"/>
+<img align="center" src="/resources/pictures/Main_page.png" width="1000" alt="Main_page"/>
 
-[Ссылка](https://github.com/mtotschnig/MyExpenses) на Github.
+[Ссылка](https://github.com/mtotschnig/MyExpenses) на Github c кодом приложения.
 ___
 <a id="item-2"></a>
 ### Цель проекта:
 
-Тестирование основных функций приложения, позволяющих пользователю успешно настроить приложение под себя и 
+Тестирование основных функций приложения, позволяющих пользователю успешно настроить его под себя и 
 использовать основной функционал.
 
 ___
@@ -40,10 +35,10 @@ ___
       <td>Язык программирования, IDE</td>
       <td align="center">
         <a target="_blank" href="https://www.python.org/">
-          <img align="center" src="/resources/Python.svg" width="40" height="40" alt="Python"/>
+          <img align="center" src="/resources/icons/Python.svg" width="40" height="40" alt="Python"/>
         </a>
         <a target="_blank" href=https://www.jetbrains.com/pycharm/>
-          <img align="center" src="/resources/PyCharm.svg" width="40" height="40" alt="PyCharm"/>
+          <img align="center" src="/resources/icons/PyCharm.svg" width="40" height="40" alt="PyCharm"/>
         </a>
       </td>
     </tr>
@@ -51,13 +46,13 @@ ___
       <td>Библиотеки, фреймворки для написания тестов</td>
       <td align="center">
         <a target="_blank" href=https://appium.io/docs/en/latest/>
-          <img align="center" src="/resources/Appium1.png" width="40" height="40" alt="Appium"/>
+          <img align="center" src="/resources/icons/Appium.png" width="40" height="40" alt="Appium"/>
         </a>
         <a target="_blank" href=https://github.com/yashaka/selene>
-          <img align="center" src="/resources/Selene.png" width="40" height="40" alt="Selene"/>
+          <img align="center" src="/resources/icons/Selene.png" width="40" height="40" alt="Selene"/>
         </a>
         <a target="_blank" href=https://docs.pytest.org/en/stable/index.html#>
-          <img align="center" src="/resources/Pytest.svg" width="40" height="40" alt="Pytest"/>
+          <img align="center" src="/resources/icons/Pytest.svg" width="40" height="40" alt="Pytest"/>
         </a>
       </td>
     </tr>
@@ -65,10 +60,10 @@ ___
       <td>Запуск тестов</td>
       <td align="center">
         <a target="_blank" href=https://www.jenkins.io/>
-          <img align="center" src="/resources/Jenkins.svg" width="40" height="40" alt="Jenkins"/>
+          <img align="center" src="/resources/icons/Jenkins.svg" width="40" height="40" alt="Jenkins"/>
         </a>
         <a target="_blank" href=https://www.browserstack.com/>
-          <img align="center" src="/resources/Bstack.svg" width="40" height="40" alt="Browserstack"/>
+          <img align="center" src="/resources/icons/Bstack.svg" width="40" height="40" alt="Browserstack"/>
         </a>
       </td>
     </tr>
@@ -76,13 +71,16 @@ ___
       <td>Формирование отчета и отправление уведомлений</td>
       <td align="center">
         <a target="_blank" href=https://qameta.io/>
-          <img align="center" src="/resources/AllureTestOps.png" width="40" height="40" alt="Allure TestOps"/>
+          <img align="center" src="/resources/icons/AllureTestOps.png" width="40" height="40" alt="Allure TestOps"/>
+        </a>
+        <a target="_blank" href=https://allurereport.org/>
+          <img align="center" src="/resources/icons/AllureReport.png" width="40" height="40" alt="Allure Report"/>
         </a>
         <a target="_blank" href=https://www.atlassian.com/ru/software/jira>
-          <img align="center" src="/resources/Jira.svg" width="40" height="40" alt="Jira"/>
+          <img align="center" src="/resources/icons/Jira.svg" width="40" height="40" alt="Jira"/>
         </a>
         <a target="_blank" href=https://telegram.org/>
-          <img align="center" src="/resources/Telegram.png" width="40" height="40" alt="Telegram"/>
+          <img align="center" src="/resources/icons/Telegram.png" width="40" height="40" alt="Telegram"/>
         </a>
       </td>
     </tr>
@@ -99,7 +97,7 @@ ___
   * Проверка настроек второй стартовой страницы
   * Проверка настроек третьей стартовой страницы
 
-- Тестирование основных функций главной страницы
+- Тестирование основных функций главной страницы:
   * Наличие основных опций на главной странице
   * Добавление расхода/дохода
   * Добавление расхода/дохода со всеми заполненными полями и проверка их содержания в детализации расхода/дохода
@@ -107,133 +105,172 @@ ___
   * Удаление последнего расхода/дохода
   * Проверка работы функции "Save and create"
 
-[//]: # (___)
 
-[//]: # (<a id="item-5"></a>)
+___
 
-[//]: # (### Сборка проекта и запуск тестов)
+<a id="item-5"></a>
 
-[//]: # ()
-[//]: # (Сборка, параметризация и запуск проекта производятся удаленно с помощью **Jenkins**.)
+### Сборка проекта и запуск тестов
 
-[//]: # (При каждом запросе на тестирование браузера **Selenoid** запускает новый **Docker**-контейнер и )
+Запустить проект можно как локально, так и удаленно. Далее будут приведены списки действия для обоих случаем.
 
-[//]: # (останавливает его после закрытия браузера. Параметр, который можно изменить перед запуском проекта, - это версия браузера **Chrome**.)
+Для запуска проекта удаленно с использованием Jenkins и BrowserStack необходимо:
+- Создать новый проект в **Jenkins**
+- Указать в настройках проекта **Source Code Management** в **Git** директорию текущего проекта и ветку `main`
+- В **Build Steps**:
+  * Создать файл `.env.bstack_credential` по примеру `.env.bstack_credential.example`, получив необходимые параметры из 
+  аккаунта в BrowserStack (подробнее по [ссылке]) и 
+  * Создать файл `.env.bstack_credential` по примеру `.env.bstack_credential.example`, указав для него опции 
+  **Create at Workspace**  и **Overwrite file** и получив значения **bstack_userName** и **bstack_accessKey** из 
+  аккаунта в **BrowserStack** (подробнее по [ссылке](https://www.browserstack.com/docs/iaam/security/manage-access-keys))
+  * Загрузить файл `*.apk` приложения в файловую систему **BrowserStack** (подробнее по [ссылке](https://www.browserstack.com/docs/app-automate/appium/upload-app-from-filesystem)) и полученную 
+  ссылку указать в переменной `app` файла `.env.bstack_credential`
+  * Создать **Execute shell** с кодом:
+    ```shell
+    python -m venv .venv
+    source .venv/bin/activate
+    pip install poetry
+    poetry install --no-root
+    context='bstack_android' pytest tests
+    ```
+  * В **Post-build Actions** добавить опцию **Allure Report** с указанием пути `allure-results`
+  * Добавление синхронизации с **Allure TestOps** и добавление оповещений в **Telegram** может быть добавлено
+  дополнительно
 
-[//]: # ()
-[//]: # (Для запуска проекта необходимо:)
+Вариант для преподавателей и учеников школы QA.GURU:
+- Перейти по [ссылке](https://jenkins.autotests.cloud/job/14_vic_lav_my_expenses/) к проекту в **Jenkins**
+- Нажать **"Build Now"**
 
-[//]: # (- Перейти по [ссылке]&#40;https://jenkins.autotests.cloud/job/14_vic_lav_selectel/&#41; к проекту в **Jenkins**)
+<p align="center">
+<img src="resources/pictures/Jenkins_Build_Now.png" width="700" alt="Press Build Now">
+</p>
 
-[//]: # (- Нажать **"Build with Parameters"**)
+Для запуска проекта локально на ПК с помощью **BrowserStack** или **Android Studio** необходимо:
+- Скачать проект и открыть его привычным способом
+- Установить `poetry`, если не установлен*: `pip install poetry`
+- Создать виртуальное окружение и установить зависимости
+- Для запуска проекта в **BrowserStack**:
+  * Создать файл `.env.bstack_credential` по примеру `.env.bstack_credential.example`, получив значения **bstack_userName**
+и **bstack_accessKey** из аккаунта в **BrowserStack** (подробнее по [ссылке](https://www.browserstack.com/docs/iaam/security/manage-access-keys))
+  * Загрузить файл `*.apk` приложения в файловую систему **BrowserStack** (подробнее по [ссылке](https://www.browserstack.com/docs/app-automate/appium/upload-app-from-filesystem)) и полученную 
+ссылку указать в переменной `app` файла `.env.bstack_credential`
+  * В терминале* ввести: `context='bstack_android' pytest tests`
+- Для запуска проекта с использованием эмулятора из **Android Studio**:
+  * Запустить **Appium** в **PowerShell**: `appium`
+  * В **Android Studio** через **Virtual Device Manager** запустить один из созданных эмуляторов
+  * В файле `.env.local_emulator` указать параметры, соответствующие запущенному эмулятору
+  * В терминале* ввести: `context='local_emulator' pytest tests`
+___
 
-[//]: # (- Выбрать версию браузера &#40;или оставить значение по умолчанию&#41;)
+<a id="item-6"></a>
 
-[//]: # (- Нажать **"Build"**)
+### Отчет о прохождении тестов
 
-[//]: # ()
-[//]: # (<p>)
 
-[//]: # (<img src="resources/Jenkins_Build_with_Parameters.png" width="1000" alt="Press Build with Parameters">)
+Отчет формируется в **Allure Report** автоматически после прохождения тестов.  
+Если проект запущен удаленно, отчет можно открыть прямо из **Jenkins** для интересующего запуска проекта, кликнув на
+иконку **Allure Report** в конкретном запуске или на странице проекта соответственно:
 
-[//]: # (</p>)
+<p align="center">
+<img src="resources/pictures/Open_Allure_Report_2.png" width="400" alt="Open Allure Report">
+<img src="resources/pictures/Open_Allure_Report_1.png" width="400" alt="Open Allure Report">
+</p>
 
-[//]: # (<p>)
+В случае локального запуска проекта в терминале необходимо выполнить команду*:
+```shell
+allure serve allure-results
+```
+В обоих случаях откроется отчет, представленный ниже. На главной странице можно увидеть общую статистику.
 
-[//]: # (<img src="resources/Jenkins_Browser_version_Build.png" width="1000" alt="Press Build">)
+<p align="center">
+<img src="resources/pictures/Allure_Report_Main_Page.png" width="700" alt="Allure Report Main Page">
+</p>
 
-[//]: # (</p>)
+Более детальную статистику можно увидеть во вкладке **Graphs**.
+<p align="center">
+<img src="resources/pictures/Allure_Report_Graphs_1.png" width="400" alt="Allure Report Graphs">
+<img src="resources/pictures/Allure_Report_Graphs_2.png" width="400" alt="Allure Report Graphs">
+</p>
 
-[//]: # ()
-[//]: # ()
-[//]: # (Все необходимые настройки проекта и команды запуска можно посмотреть во вкладке **"Configure"** проекта в **Jenkins**.)
+Посмотреть подробнее тест-кейсы можно во вкладке **Behaviors** (или **Suites**, или **Packages**). Для каждого теста 
+представлены скриншот последней страницы, xml-файл с копией дерева последней страницы теста и видео прохождения 
+самого теста (см. правый нижний угол изображения ниже).
 
-[//]: # ()
-[//]: # (___)
+<p align="center">
+<img src="resources/pictures/Allure_Report_Test_Cases.png" width="700" alt="Allure Report Test Cases">
+</p>
 
-[//]: # (<a id="item-6"></a>)
 
-[//]: # (### Отчет о прохождении тестов)
+Также для проекта в **Jenkins** настроена синхронизация с **Allure TestOps**. В нем можно отсортировать тест-кейсы 
+необходимым образом, оформить баги, перезапустить тесты, которые не прошли, или запустить весь проект заново, 
+выбрав необходимые параметры запуска, добавить ручные тест-кейсы и т.п.
 
-[//]: # ()
-[//]: # (Отчет формируется в **Allure Report** автоматически после прохождения тестов.   )
+Для того чтобы перейти в **Allure TestOps**, необходимо в конкретном запуске или на странице проекта 
+кликнуть на иконку:  
 
-[//]: # (Если проект запущен удаленно, его можно открыть прямо из **Jenkins** для интересующего запуска проекта, кликнув на)
+<p align="center">
+<img src="resources/pictures/Open_Allure_TestOps_2.png" width="400" alt="Open AllureTestOps">
+<img src="resources/pictures/Open_Allure_TestOps_1.png" width="400" alt="Open Allure TestOps">
+</p>
 
-[//]: # (иконку **Allure Report**.  )
 
-[//]: # (В случае локального запуска проекта, в терминале необходимо выполнить команду:)
+Общую информацию по всем запускам и тестам представлена во вкладке **Dashboards**.
 
-[//]: # ()
-[//]: # (```shell)
+<p align="center">
+<img src="resources/pictures/Allure_TestOps_Dashboards.png" width="700" alt="AllureTestOps Dashboards">
+</p>
 
-[//]: # (allure serve allure-results)
+Общую информацию по тестам для конкретного запуска можно увидеть во вкладке **Launches**, кликнув на интересующий.
 
-[//]: # (```)
+<p align="center">
+<img src="resources/pictures/Allure_TestOps_Launch.png" width="700" alt="Allure TestOps Launch">
+</p>
 
-[//]: # ()
-[//]: # (<p>)
+Все тест-кейсы представлены по вкладке **Test cases** (см. левая часть изображения ниже). За счет того, что все тесты были написаны с разметкой 
+`allure.steps`, мы имеем живую документацию, которая будет обновляться при изменении тестов. Пример такой документации 
+для одного из тестов приведен ниже (см. правая часть изображения ниже).
 
-[//]: # (<img src="resources/Allure_report.png" width="1000" alt="Allure Report">)
+<p align="center">
+<img src="resources/pictures/Allure_TestOps_Test_Cases.png" width="700" alt="Allure TestOps Tests Cases">
+</p>
 
-[//]: # (</p>)
+При необходимости можно отфильтровать тесты по какому-либо критерию.
 
-[//]: # ()
-[//]: # (___)
+<p align="center">
+<img src="resources/pictures/Allure_TestOps_Test_Cases_Filtered.png" width="700" alt="Allure TestOps Tests Cases Filtered">
+</p>
 
-[//]: # (<a id="item-7"></a>)
+___
 
-[//]: # (### Уведомление о прохождении тестов)
+<a id="item-7"></a>
 
-[//]: # ()
-[//]: # (Проект в **Jenkins** настроен таким образом, чтобы уведомления приходили в конкретный чат )
+### Уведомление о прохождении тестов
 
-[//]: # (приложения **Telegram**.)
+Проект в **Jenkins** настроен таким образом, чтобы уведомления приходили в конкретный чат приложения **Telegram**.
 
-[//]: # ()
-[//]: # (<p>)
+<p align="center">
+<img src="resources/pictures/Telegram_message.png" width="350" alt="Message from Telegram">
+</p>
 
-[//]: # (<img src="resources/Telegram_message.png" width="350" alt="Message from Telegram">)
+___
 
-[//]: # (</p>)
+<a id="item-8"></a>
 
-[//]: # ()
-[//]: # (___)
+### Видео о прохождении тестов
 
-[//]: # (<a id="item-8"></a>)
+Ниже приведены видео о прохождении тестов, запущенных:
 
-[//]: # (### Видео о прохождении тестов)
+- удаленно на BrowserStack для первой группы тестов
 
-[//]: # (Ниже приведены видео о прохождении тестов, запущенных)
+<p align="center">
+<img src="resources/video/Mobile_1.gif" width="500" alt="Video from Browserstack">
+</p>
 
-[//]: # (- удаленно на Browserstack)
+- удаленно на BrowserStack для второй группы тестов
 
-[//]: # (<p>)
+<p align="center">
+<img src="resources/video/Mobile_2.gif" width="500" alt="Video from Browserstack">
+</p>
 
-[//]: # (<img src="resources/video_tests.gif" alt="Selenoid Video">)
 
-[//]: # (</p>)
-
-[//]: # (- локально на Browserstack)
-
-[//]: # (<p>)
-
-[//]: # (<img src="resources/video_tests.gif" alt="Selenoid Video">)
-
-[//]: # (</p>)
-
-[//]: # (- локально для эмулятора)
-
-[//]: # (<p>)
-
-[//]: # (<img src="resources/video_tests.gif" alt="Selenoid Video">)
-
-[//]: # (</p>)
-
-[//]: # (- локально на реальном устройстве)
-
-[//]: # (<p>)
-
-[//]: # (<img src="resources/video_tests.gif" alt="Selenoid Video">)
-
-[//]: # (</p>)
+(*) - все команды указаны для ОС Windows при настройке использования Git Bash для терминала PyCharm
