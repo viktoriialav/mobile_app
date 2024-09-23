@@ -30,11 +30,10 @@ class StartPages:
                 have.exact_text(f'System default + {value * 10}%'))
 
     def make_display_form_compact(self, value: bool):
-        with step('Make the display form compact'):
-            if value:
-                with step('Make the display form compact'):
-                    browser.element((AppiumBy.ANDROID_UIAUTOMATOR,
-                                     'new UiSelector().className("android.widget.CheckBox").instance(0)')).click()
+        if value:
+            with step('Make the display form compact'):
+                browser.element((AppiumBy.ANDROID_UIAUTOMATOR,
+                                 'new UiSelector().className("android.widget.CheckBox").instance(0)')).click()
 
     def check_display_form(self):
         with step('Check the display form'):
@@ -64,9 +63,10 @@ class StartPages:
                 have.exact_text(text))
 
     def turn_on_backup_database_at_the_specified_time(self, value):
-        browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/auto_backup')).click()
-        if not value:
-            browser.element((AppiumBy.ID, 'com.android.permissioncontroller:id/permission_allow_button')).click()
+        with step('Turn on backup database at the specific time'):
+            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/auto_backup')).click()
+            if not value:
+                browser.element((AppiumBy.ID, 'com.android.permissioncontroller:id/permission_allow_button')).click()
 
     def create_label_for_budget_book(self, value):
         with step('Create a label for a new budget book'):
