@@ -15,7 +15,7 @@ def mobile_management():
     browser.config.timeout = config.settings.timeout
 
     browser.config._wait_decorator = support._logging.wait_with(context=allure_commons._allure.StepContext)
-    browser.driver.hide_keyboard()
+    # browser.driver.hide_keyboard()
 
     yield
 

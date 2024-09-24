@@ -71,10 +71,12 @@ class StartPages:
     def create_label_for_budget_book(self, value):
         with step('Create a label for a new budget book'):
             browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/Label')).click().type(value)
+            browser.driver.hide_keyboard()
 
     def set_opening_balance(self, value):
         with step('Set an opening balance value'):
             browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/AmountEditText')).click().type(str(value))
+            browser.driver.hide_keyboard()
 
     def open_more_options_on_third_page(self):
         with step('Open more options on the third page'):
@@ -83,11 +85,13 @@ class StartPages:
     def enter_description(self, value):
         with step('Create a description for a new budget boook'):
             browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/Description')).click().type(value)
+            browser.driver.hide_keyboard()
 
     def set_budget_book_type(self, value):
         with step('Set a budget book type'):
             browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/AccountType')).click()
             self.all_options.element_by(have.exact_text(value)).click()
+            browser.driver.hide_keyboard()
 
     def skip_all_start_pages(self):
         with step('Skip all start pages to open the main page'):
