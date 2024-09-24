@@ -2,14 +2,13 @@ from datetime import date
 
 from allure import step
 from appium.webdriver.common.appiumby import AppiumBy
-from selene import browser, have, command, query
+from selene import browser, have, command
 
 
 class StartPages:
     def __init__(self):
         self.font_size = browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/font_size'))
         self.all_options = browser.all((AppiumBy.ID, 'android:id/text1'))
-        self.title = browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/suw_layout_title'))
 
     def set_theme(self, value):
         with step('Set a theme'):

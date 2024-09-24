@@ -11,7 +11,7 @@ from my_expenses_tests.models.applications import app
 class TestStartPages:
     @allure.severity(severity_level=Severity.BLOCKER)
     @allure.tag('Start page')
-    def test_start_pages_titles(self):
+    def test_start_pages_titles_and_open_the_main_page(self):
         app.start_pages.should_have_specific_title(text='My Expenses adapts to your preference', page=1)
 
         app.start_pages.open_next_page()
@@ -19,6 +19,9 @@ class TestStartPages:
 
         app.start_pages.open_next_page()
         app.start_pages.should_have_specific_title(text='Let\'s set up your first account', page=3)
+
+        app.start_pages.click_get_started()
+        app.main_page.should_have_specific_text()
 
     @allure.severity(severity_level=Severity.NORMAL)
     @allure.tag('Settings', 'Start page')
