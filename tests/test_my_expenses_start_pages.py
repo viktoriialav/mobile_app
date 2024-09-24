@@ -7,6 +7,7 @@ from my_expenses_tests.models.applications import app
 
 @allure.feature('Test start pages')
 @allure.label('owner', 'Viktoriia Lavrova')
+@allure.label('layer', 'ui')
 class TestStartPages:
     @allure.severity(severity_level=Severity.BLOCKER)
     @allure.tag('Start page')

@@ -6,6 +6,7 @@ from my_expenses_tests.models.applications import app
 
 @allure.feature('Test addition of expenses')
 @allure.label('owner', 'Viktoriia Lavrova')
+@allure.label('layer', 'ui')
 class TestAdditionExpenses:
     @allure.severity(severity_level=Severity.CRITICAL)
     @allure.tag('Main page')
