@@ -41,7 +41,6 @@ class NewExpense:
     def enter_payee_or_payer_name(self, value):
         with step('Enter the name of payee or payer'):
             browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/Payee')).click().type(value)
-            # browser.driver.hide_keyboard()
 
     def enter_notes(self, value):
         with step('Enter notes'):

@@ -2,13 +2,14 @@ from datetime import date
 
 from allure import step
 from appium.webdriver.common.appiumby import AppiumBy
-from selene import browser, have, command
+from selene import browser, have, command, query
 
 
 class StartPages:
     def __init__(self):
         self.font_size = browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/font_size'))
         self.all_options = browser.all((AppiumBy.ID, 'android:id/text1'))
+        self.title = browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/suw_layout_title'))
 
     def set_theme(self, value):
         with step('Set a theme'):
@@ -57,7 +58,7 @@ class StartPages:
         with step('Click \'Get started\''):
             browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/suw_navbar_done')).click()
 
-    def should_have_special_text(self, text, page=0):
+    def should_have_specific_title(self, text, page=0):
         with step(f'Check the text {'on the ' * bool(page) + str(page) + ' page' * bool(page)}'):
             browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/suw_layout_title')).should(
                 have.exact_text(text))
@@ -70,15 +71,11 @@ class StartPages:
 
     def create_label_for_budget_book(self, value):
         with step('Create a label for a new budget book'):
-            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/Label')).click()
-            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/Label')).type(value)
-            browser.driver.hide_keyboard()
+            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/Label')).click().type(value)
 
     def set_opening_balance(self, value):
         with step('Set an opening balance value'):
-            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/AmountEditText')).click()
-            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/AmountEditText')).type(str(value))
-            browser.driver.hide_keyboard()
+            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/AmountEditText')).click().type(str(value))
 
     def open_more_options_on_third_page(self):
         with step('Open more options on the third page'):
@@ -86,9 +83,7 @@ class StartPages:
 
     def enter_description(self, value):
         with step('Create a description for a new budget boook'):
-            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/Description')).click()
-            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/Description')).type(value)
-            browser.driver.hide_keyboard()
+            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/Description')).click().type(value)
 
     def set_budget_book_type(self, value):
         with step('Set a budget book type'):

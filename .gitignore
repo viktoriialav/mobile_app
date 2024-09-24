@@ -35,3 +35,4 @@ tests/allure-results
 allure-results-bstack
 allure-results-*
 allure-report-*
+allure-results
