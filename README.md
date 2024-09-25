@@ -117,26 +117,28 @@ ___
 
 Для запуска проекта удаленно с использованием **Jenkins** и **BrowserStack** необходимо:
 - Создать новый проект в **Jenkins**
-- Указать в настройках проекта **Source Code Management** в **Git** директорию текущего проекта и ветку `main`
-- В **Build Steps**:
-  * Создать файл `.env.bstack_credential` по примеру `.env.bstack_credential.example`, указав для него опции 
-  **Create at Workspace**  и **Overwrite file** и получив значения **bstack_userName** и **bstack_accessKey** из 
-  аккаунта в **BrowserStack** (подробнее по [ссылке](https://www.browserstack.com/docs/iaam/security/manage-access-keys))
-  * Загрузить файл `*.apk` приложения в файловую систему **BrowserStack** (подробнее по [ссылке](https://www.browserstack.com/docs/app-automate/appium/upload-app-from-filesystem)) и полученную 
-  ссылку указать в переменной `app` файла `.env.bstack_credential`
-  * Создать **Execute shell** с кодом:
-    ```shell
-    python -m venv .venv
-    source .venv/bin/activate
-    pip install poetry
-    poetry install --no-root
-    context='bstack_android' pytest tests
-    ```
-  * В **Post-build Actions** добавить опцию **Allure Report** с указанием пути `allure-results`
-  * Добавление синхронизации с **Allure TestOps** и добавление оповещений в **Telegram** может быть добавлено
-  дополнительно
+- Указать в **Confugure** проекта:
+  - В разделе **Source Code Management** в пункте **Git** директорию текущего проекта и ветку `main`
+  - В **Build Steps**:
+    * Создать файл `.env.bstack_credential` по примеру `.env.bstack_credential.example`, указав для него опции 
+    **Create at Workspace**  и **Overwrite file** и получив значения **bstack_userName** и **bstack_accessKey** из 
+    аккаунта в **BrowserStack** (подробнее по [ссылке](https://www.browserstack.com/docs/iaam/security/manage-access-keys))
+    * Загрузить файл `*.apk` приложения в файловую систему **BrowserStack** (подробнее по [ссылке](https://www.browserstack.com/docs/app-automate/appium/upload-app-from-filesystem)) и полученную 
+    ссылку указать в переменной `app` файла `.env.bstack_credential`
+    * Создать **Execute shell** с кодом:
+      ```shell
+      python -m venv .venv
+      source .venv/bin/activate
+      pip install poetry
+      poetry install --no-root
+      context='bstack_android' pytest tests
+      ```
+  - В **Post-build Actions** добавить опцию **Allure Report** с указанием пути `allure-results`
+    * Добавление синхронизации с **Allure TestOps** и добавление оповещений в **Telegram** может быть добавлено
+    дополнительно
+- Запустить проект, нажав **"Build Now"**
 
-Вариант для преподавателей и учеников школы QA.GURU:
+Вариант для преподавателей и учеников школы **QA.GURU**:
 - Перейти по [ссылке](https://jenkins.autotests.cloud/job/14_vic_lav_my_expenses/) к проекту в **Jenkins**
 - Нажать **"Build Now"**
 
