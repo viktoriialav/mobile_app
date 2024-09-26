@@ -1,7 +1,6 @@
 # User-specific stuff
 .env
 .env.bstack_credential
-**/*.apk
 
 # JetBrains
 .idea/
