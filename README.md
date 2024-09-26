@@ -153,7 +153,8 @@ ___
 - Для запуска проекта в **BrowserStack**:
   * Создать файл `.env.bstack_credential` по примеру `.env.bstack_credential.example`, получив значения **bstack_userName**
 и **bstack_accessKey** из аккаунта в **BrowserStack** (подробнее по [ссылке](https://www.browserstack.com/docs/iaam/security/manage-access-keys))
-  * Загрузить файл `*.apk` приложения в файловую систему **BrowserStack** (подробнее по [ссылке](https://www.browserstack.com/docs/app-automate/appium/upload-app-from-filesystem)) и полученную 
+  * Загрузить файл `*.apk` приложения (`resources/app_file/*.apk`) в файловую систему **BrowserStack** 
+(подробнее по [ссылке](https://www.browserstack.com/docs/app-automate/appium/upload-app-from-filesystem)) и полученную 
 ссылку указать в переменной `app` файла `.env.bstack_credential`
   * В терминале* ввести: `context='bstack_android' pytest tests`
 - Для запуска проекта с использованием эмулятора из **Android Studio**:
