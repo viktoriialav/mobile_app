@@ -20,7 +20,7 @@ class TestAdditionExpenses:
     @allure.tag('Add', 'Expense')
     def test_add_one_new_expense_and_check_it_on_main_page(self):
         # GIVEN
-        app.start_pages.skip_all_start_pages()
+        currency = app.start_pages.skip_all_start_pages_and_get_currency()
         app.main_page.close_notification()
         app.new_expense.open_new_expense()
         app.new_expense.close_notification()
@@ -32,13 +32,13 @@ class TestAdditionExpenses:
 
         # THEN
         app.main_page.should_be_on_the_main_page()
-        app.main_page.should_have_specific_total_sum(1000)
+        app.main_page.should_have_specific_total_sum(1000, currency)
 
     @allure.severity(severity_level=Severity.NORMAL)
     @allure.tag('Add', 'Expense', 'Details menu')
     def test_fill_whole_form_of_new_expense_and_check_info_in_details_menu(self):
         # GIVEN
-        app.start_pages.skip_all_start_pages()
+        currency = app.start_pages.skip_all_start_pages_and_get_currency()
         app.main_page.close_notification()
         app.new_expense.open_new_expense()
         app.new_expense.close_notification()
@@ -55,7 +55,7 @@ class TestAdditionExpenses:
         app.main_page.open_details_menu_for_last_expense()
 
         # THEN
-        app.main_page.should_have_specific_text_in_details_menu(money=1000, payee='Dad', notes='Present',
+        app.main_page.should_have_specific_text_in_details_menu(money=1000, currency=currency, payee='Dad', notes='Present',
                                                                 tags=['Birth', 'Parents'],
                                                                 expense_datetime=expense_datetime)
 
@@ -63,7 +63,7 @@ class TestAdditionExpenses:
     @allure.tag('Add', 'Expense')
     def test_add_some_new_expenses(self):
         # GIVEN
-        app.start_pages.skip_all_start_pages()
+        currency = app.start_pages.skip_all_start_pages_and_get_currency()
         app.main_page.close_notification()
         app.new_expense.open_new_expense()
         app.new_expense.close_notification()
@@ -85,14 +85,14 @@ class TestAdditionExpenses:
         app.new_expense.click_button_save_data_and_close_form()
 
         # THEN
-        app.main_page.should_have_specific_total_sum(350)
+        app.main_page.should_have_specific_total_sum(350, currency)
         app.main_page.should_have_specific_number_of_expenses(number=3, expense_datetime=expense_datetime)
 
     @allure.severity(severity_level=Severity.CRITICAL)
     @allure.tag('Delete', 'Expense')
     def test_delete_last_expense(self):
         # GIVEN
-        app.start_pages.skip_all_start_pages()
+        currency = app.start_pages.skip_all_start_pages_and_get_currency()
         app.main_page.close_notification()
         app.new_expense.open_new_expense()
         app.new_expense.close_notification()
@@ -104,13 +104,13 @@ class TestAdditionExpenses:
         app.main_page.delete_last_expence()
 
         # THEN
-        app.main_page.should_have_specific_total_sum(0)
+        app.main_page.should_have_specific_total_sum(0, currency)
 
     @allure.severity(severity_level=Severity.NORMAL)
     @allure.tag('Add', 'Expense', 'Save and Create')
     def test_button_save_and_create(self):
         # GIVEN
-        app.start_pages.skip_all_start_pages()
+        currency = app.start_pages.skip_all_start_pages_and_get_currency()
         app.main_page.close_notification()
         app.new_expense.open_new_expense()
         app.new_expense.close_notification()
@@ -128,6 +128,6 @@ class TestAdditionExpenses:
         app.new_expense.click_button_close_expense_form()
 
         # THEN
-        app.main_page.should_have_specific_total_sum(50)
+        app.main_page.should_have_specific_total_sum(50, currency)
         app.main_page.should_have_specific_number_of_expenses_with_equal_notes_and_payer(number=2, payee='Bank',
                                                                                          notes='Cashback')

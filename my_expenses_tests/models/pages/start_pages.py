@@ -2,7 +2,9 @@ from datetime import date
 
 from allure import step
 from appium.webdriver.common.appiumby import AppiumBy
-from selene import browser, have, command
+from selene import browser, have, command, query
+
+from my_expenses_tests.utils.money import define_currency
 
 
 class StartPages:
@@ -92,6 +94,20 @@ class StartPages:
             browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/AccountType')).click()
             self.all_options.element_by(have.exact_text(value)).click()
             browser.driver.hide_keyboard()
+
+    def get_currency(self):
+        with step('Get currency'):
+            currency = browser.element((AppiumBy.ID, 'android:id/text1')).get(query.attribute('text'))
+            currency = define_currency(currency)
+        return currency
+
+    def skip_all_start_pages_and_get_currency(self):
+        with step('Skip all start pages to open the main page'):
+            self.open_next_page()
+            self.open_next_page()
+            currency = self.get_currency()
+            self.click_get_started()
+        return currency
 
     def skip_all_start_pages(self):
         with step('Skip all start pages to open the main page'):

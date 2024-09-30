@@ -58,6 +58,7 @@ class TestStartPages:
         # GIVEN
         app.start_pages.open_next_page()
         app.start_pages.open_next_page()
+        currency = app.start_pages.get_currency()
 
         # WHEN
         app.start_pages.create_label_for_budget_book('My lovely budget book')
@@ -70,5 +71,6 @@ class TestStartPages:
         # THEN
         app.main_page.should_have_specific_text_after_all_setting_on_start_pages(name='My lovely budget book',
                                                                                  money='100000',
+                                                                                 currency=currency,
                                                                                  description='The main budget book',
                                                                                  account_type='Bank accounts')

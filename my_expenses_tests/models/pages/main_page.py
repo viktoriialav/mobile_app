@@ -40,10 +40,10 @@ class MainPage:
             browser.element((AppiumBy.ACCESSIBILITY_ID, 'More options')).should(be.visible)
             self.toolbar.all((AppiumBy.CLASS_NAME, 'android.widget.TextView')).first.should(have.exact_text(name))
 
-    def should_have_specific_text_after_all_setting_on_start_pages(self, name, money, description, account_type):
+    def should_have_specific_text_after_all_setting_on_start_pages(self, name, money, currency, description, account_type):
         with step('Check all specific options in the main menu after the third start page settings'):
             self.toolbar.all((AppiumBy.CLASS_NAME, 'android.widget.TextView')).first.should(have.exact_text(name))
-            self.total_sum.should(have.text(int_to_str(money)))
+            self.total_sum.should(have.exact_text(int_to_str(money, currency)))
 
             self.manage_accounts_button.click()
 
@@ -51,14 +51,14 @@ class MainPage:
             self.accountList.element((AppiumBy.ANDROID_UIAUTOMATOR, f'new UiSelector().text({account_type})'))
             self.accountList.element((AppiumBy.ANDROID_UIAUTOMATOR, f'new UiSelector().text({description})'))
 
-    def should_have_specific_text_in_details_menu(self, money: int, expense_datetime: datetime,
+    def should_have_specific_text_in_details_menu(self, money: int, currency: str,  expense_datetime: datetime,
                                                   payee: str, notes: str, tags: list[str]):
         with (step('Check the specific text in the detail menu for the expense')):
             expense_datetime = datetime_long_format(expense_datetime)
             browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/Date')).should(have.exact_text(expense_datetime))
 
-            money = int_to_str(money)
-            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/Amount')).should(have.text(f'{money}'))
+            money = int_to_str(money, currency)
+            browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/Amount')).should(have.exact_text(f'{money}'))
 
             browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/Comment')).should(have.exact_text(notes))
             browser.element((AppiumBy.ID, 'org.totschnig.myexpenses:id/Payee')).should(have.exact_text(payee))
@@ -71,9 +71,9 @@ class MainPage:
             self.last_expense.click()
             browser.element((AppiumBy.ANDROID_UIAUTOMATOR, 'new UiSelector().text("Details")')).click()
 
-    def should_have_specific_total_sum(self, value):
+    def should_have_specific_total_sum(self, value, currency):
         with step('Check total sum'):
-            self.total_sum.should(have.text(int_to_str(value)))
+            self.total_sum.should(have.exact_text(int_to_str(value, currency)))
 
     def delete_last_expence(self):
         with step('Delete the last expense'):
